@@ -41,3 +41,9 @@ sudo deluser --remove-all-files superman
 passwd # change your own password
 sudo passwd username # change the password for specific user 
 ```
+- will the service stop running if we delete the correspond system user ? 
+```bash 
+ps aux | grep "nginx"
+sudo  userdel www-data
+```
+![when-delete-system-user-that-runs-services](image.png)
