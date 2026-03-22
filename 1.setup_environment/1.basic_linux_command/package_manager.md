@@ -82,7 +82,11 @@ sudo systemctl daemon-reload
 sudo systemctl stop nginx 
 
 ```
+- **notes for `apt purge` and `apt purge`** 
+    - `sudo apt remove nginx`: remove nginx but keep configuration ( easily for when you reinstall it later )
+    - `sudo apt purge nginx` : remove nginx and it's configuration ( if you want a full reset )
 
+    - `sudo apt autoremove` : delete all the remaining dependencies associated with nginx 
 
 - Working with text editor 
 Nano 
