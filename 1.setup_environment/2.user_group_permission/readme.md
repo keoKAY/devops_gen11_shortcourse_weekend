@@ -40,8 +40,13 @@ sudo deluser --remove-all-files superman
 
 passwd # change your own password
 sudo passwd username # change the password for specific user 
+
+# add normal to sudoer group
+sudo usermod -aG sudo superman
 ```
-- will the service stop running if we delete the correspond system user ? 
+
+## Questions
+1. will the service stop running if we delete the correspond system user ? 
 ```bash 
 ps aux | grep "nginx"
 sudo  userdel www-data
