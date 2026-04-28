@@ -1,0 +1,20 @@
+# docker-compose.yaml
+services: 
+  nginx-svc: 
+    image: nginx:alpine
+    container_name: nginx-cont
+    pull_policy: if_not_present # default policy
+    ports:
+      - 3005:80
+  reactjs-svc: 
+    build:  
+      context: /home/vagrant/reactjs-devop8-template 
+      dockerfile: Dockerfile
+    image: lyvanna544/build-reactjs-svc:v1.0.0
+    container_name: reactjs-cont
+    #pull_policy: build
+    ports:
+      - 3000:80 
+
+# volumes:
+# networks:

@@ -1,0 +1,30 @@
+#!/bin/bash
+demo: 
+    mkdir source_folder
+    touch source_folder/firstfile.txt 
+
+docker option:
+  #!/bin/bash
+    case {{option}} in
+        "deploy")
+            echo "1. Pulling image from dockerhub" 
+            docker pull 69966/earthdx:78 
+            echo "2. Starting the service , exposed port 3000" 
+            docker run -dp 3000:80 \
+                --name reactjs-app \
+                69966/earthdx:78
+        ;; 
+
+        "destroy")
+            echo "1. Stop  container " 
+            docker stop reactjs-app 
+            echo "2. Remove container" 
+            docker rm -f reactjs-app
+            echo "3. Delete image from machine"
+            docker rmi 69966/earthdx:78
+        ;; 
+
+        *)
+        echo "Invalid option!" 
+        ;; 
+    esac 

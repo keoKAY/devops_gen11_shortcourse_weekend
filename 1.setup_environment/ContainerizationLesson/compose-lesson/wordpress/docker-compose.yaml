@@ -1,0 +1,42 @@
+# Need to store the credential inside the env file
+services: 
+  mysql-svc:
+    container_name: mysql-cont
+    image: mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=${APP_PASSWORD:-password}
+    - MYSQL_USER=${APP_USER:-demouser}
+    - MYSQL_PASSWORD=${APP_PASSWORD:-password}
+    - MYSQL_DATABASE=${APP_DATABASE}
+    ports: 
+      - 3306
+    volumes:
+      - mysql-db:/var/lib/mysql
+    networks:
+      - wordpressnet
+  wordpress-svc: 
+    container_name: wordpress-cont
+    image: wordpress 
+    ports:
+      - 80 
+    volumes:
+      - wordpress-db:/var/www/html
+    networks:
+      - wordpressnet
+    environment:
+    - WORDPRESS_DB_HOST=mysql-svc
+    - WORDPRESS_DB_USER=${APP_USER}
+    - WORDPRESS_DB_PASSWORD=${APP_PASSWORD}
+    - WORDPRESS_DB_NAME=${APP_DATABASE}
+    depends_on:
+      - mysql-svc
+volumes:
+  mysql-db: 
+  wordpress-db: 
+
+networks: 
+  wordpressnet: 
+    name: wordpressnet
+    driver: bridge   
+
+# kGnTLR)Y*x8h@V*s@6

@@ -1,0 +1,7 @@
+demo: 
+    echo "1. This is demo recipe" 
+    # run various commands here 
+build: 
+    date 
+    echo "2. this is the build step"
+    whoami

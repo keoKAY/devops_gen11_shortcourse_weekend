@@ -4,9 +4,9 @@ service_name="$1"
 service_port="$2" 
 subdomain="$3"
 
-
+# subdomain=reactjs.istad.dev
 echo "Setting up config for $service_name" 
-cat << EOF > reverse-proxy.conf 
+cat << EOF > "/etc/nginx/conf.d/${service_name}.conf"
 server {
     listen 80;
     server_name $subdomain.istad.dev;
@@ -26,3 +26,12 @@ server {
 }
 
 EOF
+
+echo "Testing the nginx configuration syntax " 
+sudo nginx -t 
+
+echo "Reload nginx service " 
+sudo nginx -s reload 
+# letsencrypt ... 
+
+

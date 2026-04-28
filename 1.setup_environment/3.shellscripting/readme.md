@@ -44,5 +44,8 @@ grep -i "error" application.log  #ignore case
 grep -o "error" application.log # only match 
 # Regex = Regular Expression 
 grep -E  "^port: " application.log 
-grep -E "p**t" application.log
+grep -E "p.*t" application.log
+grep -E "p..t" application.log
+
+cd /var/log/nginx
 ``` 

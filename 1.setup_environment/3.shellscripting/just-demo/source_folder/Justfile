@@ -1,0 +1,17 @@
+# Define a recipe that uses bash to handle a case statement
+deploy target="staging":
+    #!/bin/bash
+    case "{{target}}" in
+        production)
+            echo "Deploying to production..."
+            # Production commands here
+            ;;
+        staging)
+            echo "Deploying to staging..."
+            # Staging commands here
+            ;;
+        *)
+            echo "Unknown target: {{target}}"
+            exit 1
+            ;;
+    esac
