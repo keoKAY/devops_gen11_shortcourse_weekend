@@ -50,6 +50,17 @@ server {
 
 Check if the subdomain already point to IP 
 ```bash 
+sudo apt update && sudo apt upgrade 
+sudo apt install dnsutils -y
+
 nslookup jenkins-sc.anajak-khmer.site
 
+```
+
+- Adding https for the jenkins service 
+> Requirement: using certbot ( python tool for requesting adding ssl ) , letsencrypt
+
+```bash 
+sudo apt update
+sudo apt install certbot python3-certbot-nginx
 ```
