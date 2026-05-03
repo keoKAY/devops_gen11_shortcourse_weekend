@@ -1,0 +1,24 @@
+# external-compose.yaml
+services: 
+  nginx-svc: 
+    container_name: nginx-container
+    image: nginx:alpine 
+    restart: always 
+    volumes: 
+      - nginx-vol:/app
+    networks: 
+      - external-network
+
+volumes: 
+  nginx-vol:
+    external: true 
+networks: 
+  external-network:
+    driver: bridge
+    external: true 
+
+
+
+# for this to work, you need to create these
+# docker volume create nginx-vol 
+# docker network create external-network

@@ -1,0 +1,24 @@
+services: 
+  nginx: 
+    image: nginx:alpine 
+    container_name: nginx-cont 
+    networks:
+      custom-network:
+        ipv4_address: 192.168.1.10
+  postgres: 
+    image: nginx
+    container_name: postgres-cont
+    networks: 
+      custom-network: 
+        ipv4_address: 192.168.1.13
+
+networks:
+  custom-network: 
+    driver: bridge
+    ipam: 
+      config: 
+        - subnet: 192.168.1.0/24
+
+
+# docker inspect container-name 
+# docker network inspect advanced_custom-network | jq -r '.[0].Containers'
