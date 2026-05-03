@@ -46,7 +46,18 @@ server {
     }
 }
 ```
+- Location to put your reverse proxy configuration 
+```bash 
+vim /etc/nginx/conf.d/jenkins.conf 
+# paste the content here 
+# ESC , :wq!
 
+
+sudo nginx -t # for testing the configuration for nginx conf 
+# Applying the configuration , we have two ways 
+# sudo nginx -s reload
+# sudo systemctl restart nginx
+```
 
 Check if the subdomain already point to IP 
 ```bash 
