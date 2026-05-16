@@ -21,3 +21,21 @@ ansible -i inventory.ini instance2 -m ping
 ansible -i inventory.ini all -m ping 
 
 ```
+
+- If you want to specific the location of your private key file 
+```bash 
+[all:vars]
+ansible_user=ubuntu
+ansible_ssh_private_key_file=~/.ssh/id_rsa
+```
+
+### 1. Using Adhoc command with ansible 
+```bash 
+# Install nginx on all machine 
+ansible -i inventory.ini all -m apt -a "name=nginx state=present" 
+
+ansible -i inventory.ini all -m command -a "date" 
+
+# To uninstall the nginx on all the machine 
+ansible -i inventory.ini all -m apt -a "name=nginx state=absent" 
+```

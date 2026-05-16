@@ -1,0 +1,13 @@
+- name: Install Nginx Web Server 
+  hosts: all
+  become: true  # run with sudo privilege 
+  tasks: 
+    - name: Update Apt cache  
+      apt: 
+        update_cache: true 
+    - name: Installing nginx  
+      apt: 
+        name: nginx 
+        state: present 
+
+# ansible-playbook -i inventory.ini playbooks/first-playbook.yml -vvv
