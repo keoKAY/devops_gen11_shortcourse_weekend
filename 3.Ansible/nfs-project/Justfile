@@ -6,3 +6,6 @@ ping-clients:
 nfs-server: 
     ansible-playbook -i inventory.ini \
         playbooks/nfs-server.yaml 
+nfs-main: 
+    ansible-playbook -i inventory.ini \
+        playbooks/nfs-main.yaml

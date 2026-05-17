@@ -1,0 +1,5 @@
+# Calling both playbook to run in one place 
+- import_playbook: nfs-server.yaml 
+  when: false # to skip this since we already run it before,. 
+- import_playbook: nfs-client.yaml
+  
