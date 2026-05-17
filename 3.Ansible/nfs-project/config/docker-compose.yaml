@@ -1,0 +1,12 @@
+# Docker for Spring Project 
+services: 
+  spring-svc: 
+    container_name: spring-cont 
+    # This service provide the features of file upload 
+    image: 69966/springgradleimg:1.1.1
+    restart: always # auto restart the container whenever the server reboot or have any issue 
+    ports: 
+      - 3002:8080
+    # nfs_client must has this path 
+    volumes: 
+      - "/mnt/nfs_shared/spring_images:/app/src/main/resources/images"

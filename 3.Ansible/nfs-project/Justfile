@@ -9,3 +9,7 @@ nfs-server:
 nfs-main: 
     ansible-playbook -i inventory.ini \
         playbooks/nfs-main.yaml
+
+run1: 
+    ansible-playbook -i inventory.ini \
+        playbooks/deploy-svc.yaml

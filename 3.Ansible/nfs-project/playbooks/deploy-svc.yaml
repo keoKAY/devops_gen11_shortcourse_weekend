@@ -1,0 +1,21 @@
+# Deploy spring container with dokcer composes 
+- name: Deploy Spring Container 
+  hosts: instance2 
+  become: true 
+  tasks: 
+    - name: Install nginx , docker and docker compose 
+      apt: 
+        name: 
+          - docker 
+          - nginx 
+          - docker-compose 
+        state: present 
+
+    - name: Copy the docker compose config 
+      copy: 
+        src: ../config/docker-compose.yaml
+        dest: /opt/docker-compose.yaml
+    - name: Running the docker compose file 
+      command: docker-compose up -d 
+      args:   
+        chdir: /opt 
