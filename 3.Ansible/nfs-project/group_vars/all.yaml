@@ -1,8 +1,9 @@
 nfs_server: 
   ip: 10.170.0.2
+
+  # if we use this , it's more dynamic and more resuable
   #ip:  "{{ hostvars['localhost']['ansible_default_ipv4']['address'] }}"
   mount_path: /srv/nfs_shared
-
 nfs_client:
   mount_path: /mnt/nfs_shared
   ips: 
