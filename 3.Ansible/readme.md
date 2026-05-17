@@ -85,3 +85,32 @@ ansible-galaxy collection install community.docker
 
 
 ```
+
+
+
+
+
+### UPDATE NEW DOCKER VERSION AFTER INSTALLING THE OLD ONE 
+
+```bash 
+sudo apt remove docker docker-compose 
+audo apt purge docker docker-compose 
+sudo autoremove 
+
+
+# install newwer version , but the docker enable to start 
+sudo systemctl stop docker
+sudo systemctl stop containerd
+sudo apt remove -y docker docker-engine docker.io containerd runc docker-compose-plugin
+
+sudo apt purge -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo rm -rf /var/lib/docker
+sudo rm -rf /var/lib/containerd
+sudo rm -rf /etc/docker
+
+sudo rm -f /etc/apt/sources.list.d/docker.list
+sudo rm -f /etc/apt/keyrings/docker.asc
+
+
+# Now you can install the newer one 
+```
