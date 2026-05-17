@@ -2,10 +2,41 @@
   hosts: nfs-server
   become: true 
   tasks: 
-    - name: Printing all the values fron the variable 
-      debug: 
-        msg: "{{nfs_server.mount_path}} server_ip: {{nfs_server.ip }}"
-    # - name: Update packages 
-    #   apt: 
-    #     update_cache: yes 
-      
+    - name: Update packages 
+      apt: 
+        update_cache: yes 
+    - name: install nfs server 
+      apt: 
+        name: nfs-kernel-server 
+        state: present 
+    - name: Create the shared directory 
+      file:   
+        path: "{{ nfs_server.mount_path }}"
+        state: directory 
+        group: "nogroup"
+        owner: "nobody"
+        mode: "0777"
+    - name: Add NFS export entries
+      lineinfile:
+        path: /etc/exports
+        line: "{{ nfs_server.mount_path }} {{ item }}(rw,sync,no_subtree_check,no_root_squash)"
+        create: yes
+        state: present
+      loop: "{{ nfs_client.ips }}"
+    # - name: Configure the NFS Server exports 
+    #   blockinfile: 
+    #     path: /etc/exports
+    #     block: |
+    #       {{ nfs_server.mount_path }} {{ export_entries }}
+    #     create: yes 
+    #     state: present 
+    #   vars: 
+    #     export_entries: >-
+    #       {{ nfs_client.ips | map('regex_replace', '^(.*)$', '\g<1>(rw,sync,no_subtree_check,no_root_squash)') | join(' ') }}
+    - name: Apply the configuration 
+      command: exportfs -ra 
+    - name: Restart the nfs server 
+      systemd: 
+        name: nfs-kernel-server
+        state: restarted 
+        enabled: true 
