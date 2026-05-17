@@ -114,3 +114,27 @@ sudo rm -f /etc/apt/keyrings/docker.asc
 
 # Now you can install the newer one 
 ```
+
+### Related to vault 
+```bash 
+
+# if you don't have a secret file 
+ansible-vault create secret.yaml 
+
+# ifyou already have a file 
+ansible-vault encrypt secret.yaml 
+ansible-vault decrypt secret.yaml 
+ansible-vault view secret.yaml 
+# enter the new password and confirm pass 
+
+ansible-playbook playbook/vault-demo.yaml \
+    --ask-vault-pass 
+# you need to enter the password for vault 
+
+# Using the password text store inside the file 
+echo "vault-pass" > .vault-pass 
+
+ansible-vault playbook/vault-demo.yaml \
+    --vault-password-file .vault-pass 
+
+```

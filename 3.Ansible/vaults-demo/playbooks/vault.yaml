@@ -1,0 +1,12 @@
+- name: Demo vault 
+  hosts: localhost 
+  vars_files:
+    - ../secrets/database-secrets.yaml
+
+  tasks: 
+    - name: Debug Stagging values 
+      debug: 
+        msg: "Database Username: {{stagging.username }} Password: {{stagging.password}}"
+    - name: Debug Production values 
+      debug: 
+        msg: "Database Username: {{prod.username }} Password: {{prod.password}}"
