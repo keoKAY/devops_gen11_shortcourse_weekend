@@ -1,0 +1,44 @@
+# v1 -> nginx 
+# v2 -> 69966/earthdx:78 (reactjs )
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-dpl
+spec:
+  replicas: 4 
+  # maxSurge: 25%
+  # maxUnavailability: 25%
+  # default is RollingUpdate 
+  # strategy: 
+  #   type: Recreate
+  stategy: 
+    rollingUpdate: 
+      maxSurge: 1 # 25%
+      maxUnavailable: 1 # 25% 
+  selector:
+    matchLabels:
+      app: demo-recreate
+  template:
+    metadata:
+      labels:
+        app: demo-recreate
+    spec:
+      containers:
+      - name: myapp-cont
+        image: nginx
+        #image: 69966/earthdx:78
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-svc
+spec:
+  selector:
+    app: demo-recreate
+  ports:
+  - port: 80
+    targetPort: 80
+
