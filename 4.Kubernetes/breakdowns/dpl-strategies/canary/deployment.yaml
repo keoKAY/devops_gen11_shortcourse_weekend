@@ -1,0 +1,49 @@
+# Blue version 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-dpl 
+  labels: 
+    name: myapp
+
+spec:
+  replicas: 2 
+  selector:
+    matchLabels:
+      app: myapp
+
+  template:
+    metadata:
+      labels:
+        app: myapp
+
+    spec:
+      containers:
+      - name: myapp
+        image: nginx
+        ports:
+        - containerPort: 80
+---
+# Green version 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-dpl 
+  labels: 
+    name: myapp
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: 69966/earthdx:78
+        ports:
+        - containerPort: 80

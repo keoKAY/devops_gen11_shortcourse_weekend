@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+spec:
+# tell which deployment to link 
+  selector:
+    app: myapp
+  ports:
+  - port: 80
+    targetPort: 80
+# kubectl scale deployment <deployment-name> --replicas=<number>
+# kubectl scale deployment nginx-dpl --replicas=0 
+# kubectl scale deploy react-dpl --replicas=4 
