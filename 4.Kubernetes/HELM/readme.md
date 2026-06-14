@@ -39,6 +39,23 @@ helm upgrade nignx-release nginx-chart --values nginx-chart/prod-values.yaml
 
 helm history nginx-release 
 helm rollback nginx-release <revision1> 
+
+# In order to store helm efficiently 
+helm package nginx-chart 
+# Create a release (deploy svc ) from the zip file 
+helm install nginx-release zip-file 
+
+helm repo add chart-name URL 
+helm repo remove chart-name 
+
 ```
 - Understand the file structure 
 - Understand the syntax 
+
+*** 
+## Create our own chart from scratch 
+
+```bash 
+helm create customized-chart 
+
+```
