@@ -5,7 +5,6 @@ metadata:
 spec:
   replicas: {{ .Values.replicas }} 
   {{- include "selector-tpl"  . }}
-
     spec:
       containers:
       {{- with .Values.container }}
