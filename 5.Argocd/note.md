@@ -85,3 +85,10 @@ metadata:
 spec:
   # ... rest of the service stays the same
 ```
+
+
+### Changing the password 
+```bash 
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+
+```
