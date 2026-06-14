@@ -1,1 +1,29 @@
-# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName.app }}-dpl
+spec:
+  replicas: {{ .Values.replicas }} 
+  {{- include "selector-tpl"  . }}
+
+    spec:
+      containers:
+      {{- with .Values.container }}
+      - name: {{ .name }}
+        image: {{ .image }}
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        volumeMounts: 
+          {{- toYaml .volumeMounts | nindent 9 }}
+        {{- if .env }}
+        env: 
+        {{- range .env }}
+          - name: {{ .name }}
+            value: {{ .value }}
+        {{- end }}
+        {{- end }}
+        ports:
+        - containerPort: {{ .port }}
+      {{- end }}
